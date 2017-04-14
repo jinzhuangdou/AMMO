@@ -158,30 +158,16 @@ The_.linkfile contains the link information for pairs of scaffold. Starting from
 (Consensus8 Consensus9)	11	0.316	(tig301 tig2)	Lg5
 (Consensus6 Consensus3)	15	0.101	(tig11 tig98)	Lg4
 ```
-7 Version changes
 ---------------------------
-Changes from previous versions of this software are noted here.  
-7.1 Version 1.0(April 4th, 2015)  
-    Initial release of the AMMO package.  
-7.2 Version 1.01(June 5th ,2016)  
-    The module of estimating internal gap sizes has been provided.  
-    Added new parameter “MIN_DEPTH” to allow users to determine the minimal sequencing depth for marker typing has been provided.   
-7.3 Version 2.0(March 10th ,2017)  
-    Changed the AMMO program to be much more memory efficient by using the functions provided in the R package “bigmemory”. Now, the new version can handle ultra-dense maps of up to ~1M markers with efficient memory usage.   
-    Updated MSTMap (Wu et al., 2008) software to the multi-threading feature to allow user to obtain optimal marker order much faster than previous version.   
-    Updated the software manual.  
-
+7 References
 ---------------------------
-8 Acknowledgements
----------------------------
-9 References
----------------------------
+```
 [1] Wang S, Meyer E, McKay J K, et al. 2b-RAD: a simple and flexible method for genome-wide genotyping. Nature Methods, 2012, 9(8): 808-810.  
 [2] Dear P H, Cook P R. Happy mapping: linkage mapping using a physical analogue of meiosis. Nucleic Acids Research, 1993, 21(1): 13-20.  
 [3] Li R, Yu C, Li Y, et al. SOAP2: an improved ultrafast tool for short read alignment. Bioinformatics, 2009, 25(15): 1966-1967.  
 [4] Catchen J M, Amores A, Hohenlohe P, et al. Stacks: building and genotyping loci de novo from short-read sequences. G3: Genes, Genomes, Genetics, 2011, 1(3): 171-182.  
 [5] Wu Y, Bhat P R, Close T J, et al. Efficient and accurate construction of genetic linkage maps from the minimum spanning tree of a graph. PLoS Genetics, 2008, 4(10): e1000212.  
-
+```
 
 
 
