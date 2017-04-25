@@ -10,8 +10,8 @@ Detailed description of the methodology and algorithms can be found in our paper
 
 Authors: 
 ----------------------------
-Jinzhuang Dou
-Computational and Systems Biology
+Jinzhuang Dou  
+Computational and Systems Biology  
 Genome Institute of Singapore (GIS)
 
 Email:
