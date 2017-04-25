@@ -70,21 +70,29 @@ USTACKS_C	2	#1
 4 Input files
 ---------------------------
 In this section, we describe four input files that are taken by AMMOpackage: INPUT_DIR, TEMPLATE_FILE, CTG_FILE and PARAMETER_FILE.   
-4.1 PARAMETER_FILE (_.conf)    
+
+4.1 PARAMETER_FILE (.conf)  
+
 The PARAMETER_FILE contains all parameters required for running AMMO. There are 17 parameters in the parameter file, including 14 main parameters and 3 advanced parameters. Each parameter is followed by its assigned value, separated by whitespaces/tabs. Text in the same line after a “#” character is treated as a comment and will not be read. For example, the following parameter specifications are equivalent in setting the parameter SAMPLE_TIME equal to 20:
 ```
 SAMPLE_TIME	20	#20
 ```
 An example PARAMETER_FILE is provided in Section 3. Four parameters do not have default values, which need to be explicitly defined by the users when in use, either in the parameter file or in the command line (see Section 5). The other 13 parameters are pre-defined unless the user wants to use settings different from the default. Please refer to Section 5 for more information on these parameters.  
-4.2 INPUT_DIR (_.fasta)  
+
+4.2 INPUT_DIR (.fasta)  
+
 The 2bRAD_FILE is the directory that contains sequence datasets for the 2b-RAD sequence dataset with the fasta format, and an example of sequencing file is provided below:
 ```
 >Seq1
 ACCTCCACGACGGCTCCGAACTTTT
 ```
-4.3 TEMPLATE_FILE (_.fasta)    
+
+4.3 TEMPLATE_FILE (.fasta)    
+
 The TEMPLATE_FILE contains sequence datasets used to retain the reads that are derived from the targeted genome sequences. As DNA contamination (e.g. derived from fosmid vector and host bacteria) in HAPPY mapping experiments is usually unavoided, using TEMPLATE_FILE is necessary for removing these contaminated tags. The TEMPLATE_FILE can be contigs generated using de novo assemblers or short sequencing reads (e.g. Miseq PE300), for latter, the sequencing coverage of at least 10x is recommended.   
-4.4 CTG_FILE (_.fasta)    
+
+4.4 CTG_FILE (.fasta)   
+
 The CTG_FILE is the input file of AMMO for scaffolding. In principle, only contigs containing at least one BsaXI tags can be anchored using 2b-RAD map. Since the average distance between adjacent BsaXI tags being 4kb theoretically, the average size of contigs longer than 10kb is recommended. As mentioned above, CTG_FILE can also be implemented as a template sequence to filter the foreign tags.  
 
 5 Usage options
@@ -137,9 +145,13 @@ perl $AMMO_PATH/AMMO.pl –p example.conf -p example.conf -S GapFill
 6 Output files
 ---------------------------
 All output files will be saved in the current directory and will start with the parameter value of OUT_PREFIX. These files are described as below.  
-6.1 _.log  
+
+6.1 .log  
+
 The terminal outputs are used to monitor and record the process when running AMMO. It starts with all parameter values specified, and reports the progress of the program step by step. The log file is identical to the terminal outputs.  
-6.2 _.map  
+
+6.2 .map  
+
 The map file which is self-explanatory and easy to understand records. The first line is the header line. Starting from the second line, each line represents one 2b-RAD tag. The first column is the marker IDs and the following three columns represent the groupIDs, scaffold/contig ID estimated genetic distance along the scaffold. The file is tab-delimited. Below is an illustration of the format of the .map file.
 ```
 Consensus1	lg1	Contig1	0.000
@@ -148,10 +160,13 @@ Consensus3	lg1	Contig6	7.174
 Consensus4	lg2	Contig3	0.000
 Consensus5	lg2	Contig3	15.000
 ```
-6.3 _.fa  
-The _.fa file contains the final scaffold sequences obtained using AMMO with CTG_FILE as an input.  
-6.4 _.link  
-The_.linkfile contains the link information for pairs of scaffold. Starting from the first line, each line represents the pair-wise link of scaffolds whose link times over the threshold setting by parameter THRESHOLD. The first column is the marker IDs and, the second column is the times that this pairs of scaffolds are adjacent to each other during the whole sampling process, the third column is the estimated genetic distance for this pairs of scaffolds, the four column denotes the corresponding scaffold/contig IDs they belong to, and the last column means the groupID they finally locate in.The file is tab-delimited. Below is an illustration of the format of the _.link file.
+6.3 .fa
+
+The .fa file contains the final scaffold sequences obtained using AMMO with CTG_FILE as an input.  
+
+6.4 .link  
+
+The .link file contains the link information for pairs of scaffold. Starting from the first line, each line represents the pair-wise link of scaffolds whose link times over the threshold setting by parameter THRESHOLD. The first column is the marker IDs and, the second column is the times that this pairs of scaffolds are adjacent to each other during the whole sampling process, the third column is the estimated genetic distance for this pairs of scaffolds, the four column denotes the corresponding scaffold/contig IDs they belong to, and the last column means the groupID they finally locate in.The file is tab-delimited. Below is an illustration of the format of the _.link file.
 ```
 (Consensus1Consensus2)	25	0.251	(tig311 tig298)	Lg1
 (Consensus5 Consensus7)	18	0.386	(tig301 tig2)	Lg2
