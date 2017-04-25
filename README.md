@@ -11,8 +11,6 @@ Detailed description of the methodology and algorithms can be found in our paper
 Authors: 
 ----------------------------
 Jinzhuang Dou  
-Computational and Systems Biology  
-Genome Institute of Singapore (GIS)
 
 Email:
 ----------------------------
@@ -21,7 +19,7 @@ douj@gis.a-star.edu.sg
 2 Getting started
 ---------------------------
 2.1 Availability  
-The AMMO software package can be downloaded from the following webpage: http://www2.ouc.edu.cn/mollusk/detailen.asp?id=752. In the package, perl scripts for Linux (64-bit) operation systems are provided. The AMMO program uses the following bioinformatics tools: SOAP2 (version 2.1.1b) [3], Stacks (version 0.99997) [4], and MSTMap (version 1.0) [5].The executable programs of these tools have already been provided in the AMMO package, so users do not need to have these tools be pre-installed in your computer. Besides, user should also have the “bigmemory” “biganalytics”,”picante” and “amap” pacakges in your R session.  
+In the package, perl scripts for Linux (64-bit) operation systems are provided. The AMMO program uses the following bioinformatics tools: SOAP2 (version 2.1.1b) [3], Stacks (version 0.99997) [4], and MSTMap (version 1.0) [5].The executable programs of these tools have already been provided in the AMMO package, so users do not need to have these tools be pre-installed in your computer. Besides, user should also have the “bigmemory” “biganalytics”,”picante” and “amap” pacakges in your R session.  
 
 2.2 Installing AMMO   
 Open a terminal and go to the directory where the AMMO.tar.gz file locates. Extract the file by typing tar –xvzfAMMO.tar.gz in the terminal. This will create a new directory called AMMO containing the executable perl scripts, required additional bioinformatics suits, and example datasets.  
