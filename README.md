@@ -134,6 +134,7 @@ USTACKS_c	int	Maximum distance (in nucleotides) allowed between stacks (default 
 ```
 
 5.3 Command line arguments  
+
 The command line flags provide the user an option to enter information from the command line. All command line arguments will overwrite values specified in the PARAMETER_FILE. If a parameter is specified with an invalid value in the PARAMETER_FILE but a valid value in the command line, the program will return a warning message and still execute correctly by taking the value from the command line. However, if a parameter value in the command line is not valid, the program will exit with an error message. If a command line flag is specified, it must be followed by a space and then the parameter value. Different command line flags can appear in any order. Most command line arguments are optional except for the four input files mentioned in Section 4. One example is shown as following: 
 ```
 perl  $AMMO_PATH/AMMO.pl –p example.conf
