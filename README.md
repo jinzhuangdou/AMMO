@@ -10,10 +10,13 @@ Detailed description of the methodology and algorithms can be found in our paper
 
 Authors: 
 ----------------------------
-Jinzhuang Dou.  
-Department of Marine Life Sciences  
-Ocean University of China  
-March 10, 2017  
+Jinzhuang Dou
+Computational and Systems Biology
+Genome Institute of Singapore (GIS)
+
+Email:
+----------------------------
+douj@gis.a-star.edu.sg
 
 2 Getting started
 ---------------------------
