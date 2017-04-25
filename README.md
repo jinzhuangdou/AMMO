@@ -18,13 +18,17 @@ douj@gis.a-star.edu.sg
 
 2 Getting started
 ---------------------------
+
 2.1 Availability  
+
 In the package, perl scripts for Linux (64-bit) operation systems are provided. The AMMO program uses the following bioinformatics tools: SOAP2 (version 2.1.1b) [3], Stacks (version 0.99997) [4], and MSTMap (version 1.0) [5].The executable programs of these tools have already been provided in the AMMO package, so users do not need to have these tools be pre-installed in your computer. Besides, user should also have the “bigmemory” “biganalytics”,”picante” and “amap” pacakges in your R session.  
 
 2.2 Installing AMMO   
+
 Open a terminal and go to the directory where the AMMO.tar.gz file locates. Extract the file by typing tar –xvzfAMMO.tar.gz in the terminal. This will create a new directory called AMMO containing the executable perl scripts, required additional bioinformatics suits, and example datasets.  
 
 2.3 Running AMMO  
+
 Remember the directory after extracting the .tar.gz file as $AMMO_PATH. Open a terminal and go to the directory that contains the raw sequencing datasets. Execute the program by typing:
 perl  $AMMO_PATH/AMMO.pl –p parameterfile
 in which –p is the command line flag specifying the parameter file and parameterfile is the name the parameter file. If your parameterfile is not specified, you can turn to learn the command line arguments by typing:
@@ -34,6 +38,7 @@ perl  $AMMO_PATH/AMMO.pl –h
 For more about the parameterfile and command line arguments, see Section3 and Section 5. 
 
 3 Examples
+
 ---------------------------
 This section provides an exemplar usage of the AMMO package based on the data in the folder named “simdata” (already included in the package). Please also refer to the next few sections for detailed information about input files (Section 4), usage options (Section 5), and output files (Section 6).
 
