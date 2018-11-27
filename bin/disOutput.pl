@@ -143,10 +143,12 @@ for(my $i=1;$i<=$mapLgNum;$i++){
            my $var1 = $lgMarkerList[$j-1] ;
            my $var2 = $lgMarkerList[$j]   ;
            $dis     = pairWiseDisCal ($var1, $var2) ;
+           
            my $physicalDis1 = $mapMap -> getCtgPos( $var1 );  
            my $physicalDis2 = $mapMap -> getCtgPos( $var2 ); 
-           $disTable{$dis}=abs($physicalDis1-$physicalDis2) if $dis>0; 
-	   print O5 "$dis\t$disTable{$dis}\t0\n" if $dis >0 && $disTable{$dis}<40000;      
+           $disTable{$dis}=abs($physicalDis1-$physicalDis2) if $dis>0;
+           #print "$var1\t$var2\t$dis\t$physicalDis1\t$physicalDis2 \n";
+	         print O5 "$dis\t$disTable{$dis}\t0\n" if $dis >0 && $disTable{$dis}<40000;      
            $dis     =0 if $dis <0 ;
            $var     = $primaryMap->getLgName ( $lgMarkerList[$j] );
            $mapMap -> setDisOfLg( $lgMarkerList[$j], $dis);
@@ -323,7 +325,8 @@ sub initiGenotype {
     open (IN, "<$var" ) || die $!;
     while(<IN>) {
          chomp;
-         my $ID = myFind ($_, "scf", 0) ;
+         #sleep(10);
+         my $ID = myFind ($_, "-", 0) ;
          $genotype{$ID} =$_ ;
     }
     close(IN);
@@ -370,6 +373,7 @@ sub pairWiseDisCal{
     $var2 = getGenotype($var2);
     my  $diss=0;
     if($var1 ne "N" && $var2 ne "N"){
+    system("mkdir -p log");
     open (O, "> ./log/demo.$id.genotype" ) || die $! ;
     print O "$global{MSTMapheader}\n$var1\n$var2\n";
     close O;
@@ -380,12 +384,12 @@ sub pairWiseDisCal{
     open (IN, "./log/demo.$id.map" ) || die $!;
     while(<IN>) {
          chomp;
-         $diss = myFind ($_, "scf", 1) if $_=~/scf/;
+         $diss = myFind ($_, "-", 1) if $_=~/-/;
     }
     close(IN);
     }
     else{
-        print "$id is not in genotype file, pls check it!\n";
+        #print "$id is not in genotype file, pls check it!\n";
     }
     return $diss ;
 }

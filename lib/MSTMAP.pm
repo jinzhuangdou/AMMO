@@ -122,7 +122,8 @@ this method returns undefined.
               $self->{$line[0]}->{name}     =  $ID  ;
               $self->{$line[0]}->{last}     =  $last ;
               $self->{$line[0]}->{pos}      =  $self->{$ID}->{markerNum};
-              $self->{$line[0]}->{ctgpos} =  $line[1];
+              my @t = split(/-/,$line[0]);
+              $self->{$line[0]}->{ctgpos}   =  $t[1];
               $last = $line[0]; 
 
            }

@@ -42,7 +42,7 @@ my %global                              ;
 my %default_value                       ;
 my $stage   =0                          ;
 my @process = ("all", "templateFilter", "markerType", "markerGroup",
-               "markerSort","contigLink","clean");
+               "markerSort","GapFill","clean");
 
 
 setDefaults()                           ;
@@ -64,7 +64,7 @@ print "Now $stage: $global{STAGE}\n";
 if ($stage ==1 || $stage==0){
     my $result = fileCheck("INPUT_DIR", "TEMPLATE_FILE", "CTG_FILE");  
     printPrnLog("Loading the parameters successfully .\n") if $result;
-    templeteFilter(); 
+    templateFilter(); 
     printPrnLog("Marker denosing using the templetFile $global{TEMPLATE_FILE} successfully.\n");
 }
 
@@ -106,10 +106,12 @@ if ($stage ==6 || $stage==0){
 
 
 
+
 sub myclean{
     system("mkdir -p temporaryFile");
-    system("rm test");
-    #system("mv step* marker* lg*  *mst* permu* 2bRAD* consensus.fasta ctgUnmap.fasta  demo  ./temporaryFile");
+    #system("rm test");
+    system("rm tre*");
+    system("mv step* marker* lg*  tmp* log* *log* final* *mst* permu* 2bRAD* consensus.fasta ctgUnmap.fasta  demo  ./temporaryFile");
 }
 sub reGetParameter{
     # Reget the value of parameters $global{MARKER_NUM} and $global{SAMPLE_SIZE} 
@@ -118,7 +120,7 @@ sub reGetParameter{
     if(-e "2bRADtyping.ctg.type"){;}
     else{
        if(-e "2bRADtyping"){
-          printPrnLog("No templeteFile available in the current folder, the original genotype file will be used.\n");
+          printPrnLog("No templateFile available in the current folder, the original genotype file will be used.\n");
           system("cp 2bRADtyping 2bRADtyping.ctg.type");
         }
         else{
@@ -160,7 +162,7 @@ sub markerGroup{
     my $soapPath       = "$Bin"."/soap" ;
     my $bwtbuilderPath = "$Bin"."/2bwt-builder" ;
     my $dataDir        = ".";
-    my $templeteFile   = $global{TEMPLATE_FILE};
+    my $templateFile   = $global{TEMPLATE_FILE};
     my $inputDir       = $global{INPUT_DIR};
     my $ctgFile        = $global{CTG_FILE} ;
 
@@ -271,13 +273,13 @@ sub markerType_ctg{
 	my $inputDir          = $global{INPUT_DIR}; 
 	my $minSample         = $global{MIN_TYPING} *$global{SAMPLE_SIZE};
 	my $maxSample         = $global{MAX_TYPING} *$global{SAMPLE_SIZE};
-  my $templeteFile=$global{TEMPLATE_FILE};
+  my $templateFile=$global{TEMPLATE_FILE};
  	system("cat $inputDir/*filter* > $inputDir/temp.merge.fa");
   system("mkdir $inputDir/soap/");
 
   #... extract [AC.....CTCC] from ctgs ... 
-  print "$templeteFile\n";
-  open (IN, "<$templeteFile" );
+  print "$templateFile\n";
+  open (IN, "<$templateFile" );
 	my $fr        = new ParseFasta(\*IN);
 	my $enzyme="[AGTCN]{100}AC[AGTCN]{5}CTCC[ATGCN]{100}-[ATGCN]{100}GGAG[AGTCN]{5}GT[ATGCN]{100}";   # 
   #my $enzyme="[AGTCN]{100}CCGG[ATGCN]{100}-[ATGCN]{100}CC[AGTCN]{1}GG[ATGCN]{100}";   # 
@@ -429,17 +431,17 @@ sub markerType{
 
 
 
-sub templeteFilter{
+sub templateFilter{
     
-    #print "$templeteFile  $inputDir\n";
+    #print "$templateFile  $inputDir\n";
 
     my $soapPath       = "$Bin"."/soap" ;
     my $bwtbuilderPath = "$Bin"."/2bwt-builder" ;
-    my $templeteFile   = $global{TEMPLATE_FILE};
+    my $templateFile   = $global{TEMPLATE_FILE};
     my $inputDir       = $global{INPUT_DIR};
     $global{SAMPLE_SIZE}=0;
     $global{INDEX}=1;                ## Remember to delete this variable
-    system("$bwtbuilderPath  $templeteFile") if $global{INDEX};
+    system("$bwtbuilderPath  $templateFile") if $global{INDEX};
     opendir (DIR, $inputDir);
     my @dire = readdir DIR;
     my %fastaFile=();
@@ -449,7 +451,7 @@ sub templeteFilter{
        if($dire[$i] eq "."||$dire[$i] eq ".." || 
                $dire[$i] =~/filter/ || $dire[$i] =~/stacks/ || $dire[$i] =~/merge/ || $dire[$i]=~/sh/){;}
        else{
-           system("$soapPath -a $inputDir/$dire[$i] -D  $templeteFile".".index -M 4 -r 0 -p 40  -v 2 -o $inputDir/soapMap") ;
+           system("$soapPath -a $inputDir/$dire[$i] -D  $templateFile".".index -M 4 -r 0 -p 40  -v 2 -o $inputDir/soapMap") ;
            open F, "<$inputDir/soapMap";
            open O, ">$inputDir/$dire[$i]".".filter";
            $global{SAMPLE_SIZE}++;
@@ -616,13 +618,13 @@ Program : AMMO.pl
 Author  : Jinzhuang Dou
 Released: June 4th, 2015
 Usage:    $PRG file -p configFile [options]
-or        $PRG file -d inputDir -t templeteFile -c ctgFile -o outprefix  [options]
+or        $PRG file -d inputDir -t templateFile -c ctgFile -o outprefix  [options]
 
 Main parameters:
 
   -p <s>     The configure file of all parameters setting required to running this software
   -d <s>     The input directory storing the raw 2b-RAD datasets generated from Happy experiments
-  -t <s>     The templete sequence used to discard the noisy reads derived from other species.
+  -t <s>     The template sequence used to discard the noisy reads derived from other species.
   -g <n>     Whether you want to get a 2b-RAD physical map or scaffold the pre-assemblies generated from
              other softwares. 1 for scaffolding pre-assemblies and 0 for de novo physical map construction
              If later, please specify the contigs as an input.\
